@@ -1,4 +1,3 @@
 function solution(n) {
-    let sqrtN = Math.sqrt(n)
-    return Number.isInteger(sqrtN) ? (sqrtN+1)**2 : -1
+    return Number.isInteger(Math.sqrt(n)) ? (Math.sqrt(n)+1)**2 : -1
 }
