@@ -4,8 +4,8 @@ function solution(s) {
   
   for(let i = 0 ; i < arr.length ; i ++ ){
     if(arr[i] !== "Z" && arr[i+1] !== "Z"){
-      result.push(arr[i])
+      result.push(Number(arr[i]))
     }
   }
-  return result.reduce((a,c)=>Number(a)+Number(c),0)
+  return result.reduce((a,c)=>a+c,0)
 }
