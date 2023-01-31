@@ -8,9 +8,7 @@ function solution(n, arr1, arr2) {
       
       let tempStr = ''
       for(let j = 0 ; j < a1[i].length ; j ++){
-           if(a1[i][j] == 1 && a2[i][j] == 1 ){
-             tempStr += '#' 
-          }else if(a1[i][j] == 1 || a2[i][j] == 1){
+         if(a1[i][j] == 1 || a2[i][j] == 1){
             tempStr += '#'
           }else {
             tempStr += ' '
