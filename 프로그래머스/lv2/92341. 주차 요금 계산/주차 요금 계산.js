@@ -5,7 +5,6 @@ function solution(fees, records) {
     let [time, car, action] = records[i].split(" ")
     let [hour, sec] = time.split(":")
     let amount = Number(hour*60) + Number(sec)
-    // console.log(amount)
     
     if(action === "IN"){
       obj[car] = (obj[car]||0) - amount
