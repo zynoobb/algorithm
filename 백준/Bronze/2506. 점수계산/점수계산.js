@@ -5,18 +5,15 @@ const input = fs.readFileSync(process.platform === "linux" ? "/dev/stdin":"ìž…ë 
 input.shift()
 function solution(data) {
   const arr = data[0].split(' ').map(Number)
-  let score = []
+  let result = 0
   arr.reduce((acc,cur)=> {
     if(cur === 1) {
-      score.push(acc + cur)
+      result += acc + cur
       return acc + cur
-    } else {
-      score.push(cur)
-      return 0
-    }
+    } else return 0
   }, 0)
 
-  console.log(score.reduce((acc,cur)=> acc + cur))
+  console.log(result)
 }
   
 solution(input)
