@@ -10,11 +10,13 @@ function solution(data) {
     table[String.fromCharCode(96+i)] = i
   }
 
-  let result = 0
+  let storage = []
   for(let i = 0 ; i < str.length ; i ++) {
-    result += (table[str[i]] * Math.pow(31,i))
+    storage.push(BigInt(table[str[i]] * Math.pow(31,i)))
   }
-  console.log(result)
+  
+  const result = storage.reduce((acc,cur)=> acc+cur)
+  console.log(Number(result))
 }
 
 solution(input)
