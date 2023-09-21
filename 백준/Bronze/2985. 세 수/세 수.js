@@ -4,14 +4,14 @@ const input = fs.readFileSync(process.platform === "linux" ? "/dev/stdin":"ìž…ë 
 
 function solution(data) {
   const mathTable = [
-    ((a,b,c)=> a + b === c ? `${a}+${b}=${c}` : false),
-    ((a,b,c)=> a === b + c ? `${a}=${b}+${c}` : false),
-    ((a,b,c)=> a - b === c ? `${a}-${b}=${c}` : false),
-    ((a,b,c)=> a === b - c ? `${a}=${b}-${c}` : false),
-    ((a,b,c)=> a * b === c ? `${a}*${b}=${c}` : false),
-    ((a,b,c)=> a === b * c ? `${a}=${b}*${c}` : false),
-    ((a,b,c)=> a / b === c ? `${a}/${b}=${c}` : false),
-    ((a,b,c)=> a === b / c ? `${a}=${b}/${c}` : false),
+    ((a,b,c)=> a + b === c && `${a}+${b}=${c}`),
+    ((a,b,c)=> a === b + c && `${a}=${b}+${c}`),
+    ((a,b,c)=> a - b === c && `${a}-${b}=${c}`),
+    ((a,b,c)=> a === b - c && `${a}=${b}-${c}`),
+    ((a,b,c)=> a * b === c && `${a}*${b}=${c}`),
+    ((a,b,c)=> a === b * c && `${a}=${b}*${c}`),
+    ((a,b,c)=> a / b === c && `${a}/${b}=${c}`),
+    ((a,b,c)=> a === b / c && `${a}=${b}/${c}`),
   ]
 
   for(let i = 0 ; i < mathTable.length ; i++) {
