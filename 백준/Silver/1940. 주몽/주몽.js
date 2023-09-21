@@ -7,13 +7,14 @@ function solution(data) {
   const sorted = temp[0].split(' ').map(Number).sort((a,b)=> a-b)
 
   let result = 0
-  while(sorted.length > 1) {
-    const sum = sorted[0] + sorted.at(-1)
+  let [frontIdx, backIdx] = [0, sorted.length - 1]
+  while(backIdx - frontIdx > 0) {
+    const sum = sorted[frontIdx] + sorted[backIdx]
     if(sum === +M) {
-      sorted.shift()
-      sorted.pop()
+      frontIdx ++
+      backIdx --
       result ++
-    } else sum < +M ? sorted.shift() : sorted.pop()
+    } else sum < +M ? frontIdx ++ : backIdx --
   }
 
   console.log(result)
