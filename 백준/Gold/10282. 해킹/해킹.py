@@ -1,0 +1,49 @@
+import sys
+data_temp = sys.stdin if sys.platform == 'linux' else open('입력.txt', 'r')
+input_data = data_temp.read().splitlines()
+import heapq
+
+def solution (data) :
+  n = int(data.pop(0))
+  arr = [list(map(int, x.split())) for x in data]
+  
+  tc = []
+  j = 0
+  for _ in range(len(arr)) : 
+    if j > len(arr) - 1 : break
+    _,b,_ = arr[j]
+    tc.append(arr[j:j+b+1])
+    j += (b + 1)
+  
+  result = list(map(lambda x : act(x), tc))
+  print('\n'.join(result))
+  
+def act(arr) :
+  n,_,c = arr.pop(0)
+  graph = [[] for _ in range(n+1)]
+  for s,e,w in arr : 
+    graph[e].append((w,s))
+  
+  return dijkstra(graph, c)
+   
+def dijkstra (graph,start) :
+  dp = [float('inf') for _ in range(len(graph))]
+  dp[start] = 0
+  pq = []
+  heapq.heappush(pq, (dp[start], start))
+  
+  while pq :
+    wei, node = heapq.heappop(pq)
+    if wei > dp[node] : continue
+    
+    for n_wei, n_node in graph[node] :
+      total_wei = wei + n_wei
+      if dp[n_node] > total_wei :
+        dp[n_node] = total_wei
+        heapq.heappush(pq, (total_wei, n_node))
+  
+  filtered = [v for v in dp if v != float('inf')]
+  
+  return f'{len(filtered)} {max(filtered)}'
+
+solution(input_data)
