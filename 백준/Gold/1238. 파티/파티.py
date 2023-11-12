@@ -8,17 +8,20 @@ def solution (data) :
   n,m,x = arr.pop(0)
   
   graph = [[] for _ in range(n+1)]
+  reverseGraph = [[] for _ in range(n+1)]
   for s,e,w in arr : 
     graph[s].append((w,e))
+    reverseGraph[e].append((w,s))
   
+  dp = dijkstra(graph, x)
+  reverseDp = dijkstra(reverseGraph, x)
   result = 0
-  for i in range(1, n+1) :
-    temp = dijkstra(graph, i, x) + dijkstra(graph, x, i)
-    result = max(result, temp)
+  for i in range(n) :
+    result = max(result, dp[i] + reverseDp[i])
 
   print(result)
 
-def dijkstra (graph,start,end) :
+def dijkstra (graph,start) :
   dp = [float('inf') for _ in range(len(graph))]
   dp[start] = 0
   pq = []
@@ -34,6 +37,6 @@ def dijkstra (graph,start,end) :
         dp[n_node] = total_wei
         heapq.heappush(pq, (total_wei, n_node))
   
-  return dp[end]
+  return dp[1:]
 
 solution(input_data)
