@@ -1,21 +1,23 @@
-const fs = require('fs')
-// const input = fs.readFileSync('입력/11047.txt').toString().trim().split('\n')
-const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
+const fs = require("fs");
+const input = fs
+  .readFileSync(process.platform === "linux" ? "/dev/stdin" : "입력.txt")
+  .toString()
+  .trim()
+  .split("\n");
 
-let target = input.shift().split(" ")[1]
+function solution(data) {
+  let [N, total] = data.shift().split(" ").map(Number);
 
-function solution (data) {
-  const coins = data.reverse()
-  let result = 0
+  const coinType = data.map(Number).reverse();
 
-  let idx = 0
-  while (target !== 0) {
-    const coin = coins[idx]
-    result += Math.floor(target/coin)
-    target = target%coin
-    idx ++
+  let count = 0;
+
+  for (let i = 0; i < N; i++) {
+    count += parseInt(total / coinType[i]);
+    total %= coinType[i];
   }
-  console.log(result)
+
+  console.log(count);
 }
 
-solution(input)
+solution(input);
