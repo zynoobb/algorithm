@@ -1,24 +1,25 @@
-const fs = require('fs')
-// const input = fs.readFileSync('입력/temp.txt').toString().trim().split('\n')
-const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
-
-const idx = input.shift().split(" ")[0]
+const fs = require("fs");
+const input = fs
+  .readFileSync(process.platform === "linux" ? "/dev/stdin" : "입력.txt")
+  .toString()
+  .trim()
+  .split("\n");
 
 function solution(data) {
-  let noListenTable = {}
-  const noListen = data.splice(0, idx)
-  
-  noListen.forEach((el)=> noListenTable[el] = true)
-  
-  let noListenNoSee = []
+  const [n, m] = data.shift().split(" ").map(Number);
+  const [a, b] = [data.slice(0, n), data.slice(n, n + m)];
 
-  data.forEach((el)=> {
-    if(noListenTable[el]) noListenNoSee.push(el)
-  })
+  const set = new Set();
+  a.forEach((name) => set.add(name));
 
-  const result = noListenNoSee.sort()
+  const names = [];
+  b.forEach((name) => {
+    if (set.has(name)) names.push(name);
+  });
 
-  console.log([result.length, ...result].join("\n"))
+  const sorted = names.sort((a, b) => a.localeCompare(b));
+
+  console.log([sorted.length, ...sorted].join("\n"));
 }
 
-solution(input)
+solution(input);
